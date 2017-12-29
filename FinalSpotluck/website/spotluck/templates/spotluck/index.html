@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+
+    <script src="/static/js/jquery-3.2.1.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+    <link href="/static/css/slick.css" rel="stylesheet">
+    <link href="/static/css/slick-theme.css" rel="stylesheet">
+    <link href="/static/css/main.css" rel="stylesheet">
+    <link href="/static/css/mainRestaurants.css" rel="stylesheet">
+
+
+    <!-- Custom Fonts -->
+    <link href="/static/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,300,100,500,700,900|Open+Sans:400,700" media="none" onload="if(media!='all')media='all'">
+    <!-- jQuery -->
+
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="/static/js/bootstrap.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.15/js/dataTables.bootstrap.min.js"></script>
+    <script src="/static/js/common.js"></script>
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+<body>
+
+<div id="navbar" class="navbar">
+  <div class="container">
+    <span class="navbar__logo u-pull-left">
+    <img class="logo-white" src="http://www.spotluck.com/images/ourlogos/logo-blackgreenoutline.svg" alt="Spotluck Home">
+    </span>
+    <span class="navbar__icon u-pull-right" id="navbar__icon" onclick="menuClick(event)"></span>
+    <nav class="navbar__menu">
+      <div class="navbar__menu-item-wrapper">
+        <a href="/">
+          <div
+            class="navbar__menu__item"
+            >
+            HOME
+          </div>
+        </a>
+        <a href="/about">
+          <div
+            class="navbar__menu__item"
+            >
+            ABOUT
+          </div>
+        </a>
+        <a href="/restaurants">
+          <div
+            class="navbar__menu__item"
+            >
+            RESTAURANTS
+          </div>
+        </a>
+        <a href="/blog/">
+          <div class="navbar__menu__item">BLOG</div>
+        </a>
+        <div class="navbar__badges">
+          <a href="https://smart.link/598ca2ba8751e">
+            <div class="navbar__menu__item"><img class="app__link" src="http://www.spotluck.com/images/badges/appStore-blhigh.png" alt="Appstore Link"></div>
+          </a>
+          <a href="https://smart.link/598ca3024f782">
+            <div class="navbar__menu__item"><img class="app__link" src="http://www.spotluck.com/images/badges/playStore-blhigh.png" alt="Googleplay link"></div>
+          </a>
+        </div>
+      </div>
+    </nav>
+  </div>
+</div>
+
+
+
+
+
+
+<div id="nav-background"></div>
+<section id="header" class="section section--header section--half">
+  <!-- Phone and Wheel placed here because they are positioned based on the content__section div -->
+  <div style="background: url('http://www.spotluck.com/images/header/chickenfried.jpg');background-size: cover;background-position: center;background-repeat: no-repeat;" id="header-cover" class="section__cover"></div>
+  <div class="section__content">
+    <div class="row">
+      <div class="city-selector__wrapper container">
+        <div class="restaurant-slider restaurantslider--inverse">
+          <div
+            data-city="DC Metro Area"
+            onClick="newCity(this, 'DC Metro Area')"
+            class="city-selector city-selector--active">
+            <h3>DC Metro Area</h3>
+          </div>
+          <div
+            data-city="Wilmington - Newark"
+            onClick="newCity(this, 'Wilmington - Newark')"
+            class="city-selector">
+            <h3>Wilmington - Newark</h3>
+          </div>
+          <div
+            data-city="Frederick - Hagerstown"
+            onClick="newCity(this, 'Frederick - Hagerstown')"
+            class="city-selector">
+            <h3>Frederick - Hagerstown</h3>
+          </div>
+          <div
+            data-city="Baltimore"
+            onClick="newCity(this, 'Baltimore')"
+            class="city-selector">
+            <h3>Baltimore</h3>
+          </div>
+          <div
+            data-city="Richmond"
+            onClick="newCity(this, 'Richmond')"
+            class="city-selector">
+            <h3>Richmond</h3>
+          </div>
+          <div
+            data-city="Blacksburg"
+            onClick="newCity(this, 'Blacksburg')"
+            class="city-selector">
+            <h3>Blacksburg</h3>
+          </div>
+          <div
+            data-city="Harrisonburg"
+            onClick="newCity(this, 'Harrisonburg')"
+            class="city-selector">
+            <h3>Harrisonburg</h3>
+          </div>
+          <div
+            data-city="Philadelphia Area"
+            onClick="newCity(this, 'Philadelphia Area')"
+            class="city-selector">
+            <h3>Philadelphia Area</h3>
+          </div>
+          <div
+            data-city="New York City"
+            onClick="newCity(this, 'New York City')"
+            class="city-selector">
+            <h3>New York City</h3>
+          </div>
+          <div
+            data-city="Williamsport"
+            onClick="newCity(this, 'Williamsport')"
+            class="city-selector">
+            <h3>Williamsport</h3>
+          </div>
+          <div
+            data-city="Long Island"
+            onClick="newCity(this, 'Long Island')"
+            class="city-selector">
+            <h3>Long Island</h3>
+          </div>
+        </div>
+      </div>
+    </div>
+    <br>
+    <br>
+    <div class="row">
+      <div class="columns twelve">
+        <span class="select__wrap">
+          <select class="select select--big" name="hubs" onChange="filterCards(this)" id="hubSelected">
+            <option value="*">Choose a Neighborhood</option>
+            <option value="*">All</option>
+            DC,VA,MD
+            <optgroup label="DC">
+              <option value="U Street Corridor">U Street Corridor</option>
+              <option value="H Street Corridor">H Street Corridor</option>
+              <option value="Adams Morgan">Adams Morgan</option>
+              <option value="Glover Park">Glover Park</option>
+              <option value="Chinatown">Chinatown</option>
+              <option value="Columbia Hts - Petworth">Columbia Hts - Petworth</option>
+              <option value="Dupont Circle">Dupont Circle</option>
+              <option value="Cleveland Park">Cleveland Park</option>
+              <option value="Tenleytown - Friendship Hts">Tenleytown - Friendship Hts</option>
+              <option value="Capitol Hill">Capitol Hill</option>
+              <option value="Georgetown">Georgetown</option>
+            </optgroup>
+            <optgroup label="VA">
+              <option value="Arlington - Courthouse">Arlington - Courthouse</option>
+              <option value="Leesburg">Leesburg</option>
+              <option value="Falls Church">Falls Church</option>
+              <option value="Arlington - Clarendon">Arlington - Clarendon</option>
+              <option value="Shirlington - Crystal City">Shirlington - Crystal City</option>
+              <option value="Arlington - Ballston">Arlington - Ballston</option>
+              <option value="Alexandria - Del Ray">Alexandria - Del Ray</option>
+              <option value="Fairfax">Fairfax</option>
+              <option value="McLean - Tysons">McLean - Tysons</option>
+            </optgroup>
+            <optgroup label="MD">
+              <option value="Silver Spring">Silver Spring</option>
+              <option value="S. Rockville">S. Rockville</option>
+              <option value="Laurel">Laurel</option>
+              <option value="Annapolis">Annapolis</option>
+              <option value="Bethesda Row">Bethesda Row</option>
+              <option value="College Park">College Park</option>
+              <option value="Bethesda - Woodmont Triangle">Bethesda - Woodmont Triangle</option>
+              <option value="N. Rockville">N. Rockville</option>
+              <option value="Gaithersburg - Kentlands">Gaithersburg - Kentlands</option>
+            </optgroup>
+          </select>
+        </span>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+
+<div class="content">
+  <section class="section section__places section__places--light">
+    <div class="container">
+      <div class="row">
+        <div class="columns twelve">
+          <h4 class="u-pull-left">Check Out Our Spots</h4>
+        </div>
+      </div>
+      <div id="search-results" class="row row--padleft">
+        {% for hotel in all_hotels %}
+            <div class="columns three search-card">
+              <a href="{% url 'spotluck:detail' hotel.id %}">
+                <div class="card card--restaurant">
+                  <img class="card card__cover" src="{{hotel.featured_image}}" alt="{{hotel.name}}">
+                  <div class="card card__gradient"></div>
+                  <div class="card card__text">
+                  <div class="row">
+                    <h4 class="u-pull-right"> 4.5</h4>
+                  </div>
+                  <div class="row">
+                    <h5 class="u-pull-Left">{{hotel.name}}</h5>
+                  </div>
+                  <div class="row">
+                    <h6 class="u-pull-Left card__subheading">{{hotel.cuisine}}</h6>
+                  </div>
+                  <div class="row">
+                    <h6 class="u-pull-Left card__subheading--bold">{{hotel.hub_name}}</h6>
+                  </div>
+                  </div>
+                </div>
+              </a>
+            </div>
+        {% endfor %}
+      </div>
+      <div id="search-button" class="row row--padleft">
+        <!-- Data from localStorage gets rendered here -->
+      </div>
+    </div>
+  </section>
+  <!--END OF PLACES SECTION -->
+</div>
+
+
+<script src="/static/js/common.js"></script>
+<script>
+    $(document).ready(function(){
+
+
+      var initialSlide = 0;
+      var activeCity = 'DC Metro Area';
+
+      initialSlide = parseInt('0');
+
+
+     $('.restaurant-slider').slick({
+            infinite: true,
+            speed: 300,
+            slidesToShow: 4,
+            slidesToScroll: 1,
+            adaptiveHeight: false,
+            variableWidth: false,
+            initialSlide : initialSlide,
+            responsive: [
+          {
+            breakpoint: 1024,
+            settings: {
+              slidesToShow: 3,
+              slidesToScroll: 1
+            }
+          },
+          {
+            breakpoint: 750,
+            settings: {
+              slidesToShow: 2,
+              slidesToScroll: 1
+            }
+          },
+          {
+            breakpoint: 500,
+            settings: {
+              slidesToShow: 1,
+              slidesToScroll: 1
+            }
+          }
+        ]
+          });
+
+          $('.slick-slide').on('click', function (event) {
+             $('.restaurant-slider').slick('slickGoTo', $(this).data('slickIndex'));
+       });
+
+    });
+</script>
+</body>
+</html>

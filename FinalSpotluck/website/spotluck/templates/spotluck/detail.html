@@ -1,0 +1,811 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{hotel.name}}</title>
+    <script src="/static/js/jquery-3.2.1.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+    <link href="/static/css/slick.css" rel="stylesheet">
+    <link href="/static/css/slick-theme.css" rel="stylesheet">
+    <link href="/static/css/main.css" rel="stylesheet">
+    <link href="/static/css/detail.css" rel="stylesheet">
+
+
+    <!-- Custom Fonts -->
+    <link href="/static/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,300,100,500,700,900|Open+Sans:400,700" media="none" onload="if(media!='all')media='all'">
+    <!-- jQuery -->
+
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="/static/js/bootstrap.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.15/js/dataTables.bootstrap.min.js"></script>
+    <script src="/static/js/common.js"></script>
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+<body>
+
+<div id="navbar" class="navbar">
+  <div class="container">
+    <span class="navbar__logo u-pull-left">
+    <img class="logo-white" src="http://www.spotluck.com/images/ourlogos/logo-blackgreenoutline.svg" alt="Spotluck Home">
+    </span>
+    <span class="navbar__icon u-pull-right" id="navbar__icon" onclick="menuClick(event)"></span>
+    <nav class="navbar__menu">
+      <div class="navbar__menu-item-wrapper">
+        <a href="{% url 'spotluck:index' %}">
+          <div
+            class="navbar__menu__item"
+            >
+            HOME
+          </div>
+        </a>
+        <a href="{% url 'spotluck:index' %}">
+          <div
+            class="navbar__menu__item"
+            >
+            ABOUT
+          </div>
+        </a>
+        <a href="{% url 'spotluck:index' %}">
+          <div
+            class="navbar__menu__item"
+            >
+            RESTAURANTS
+          </div>
+        </a>
+        <a href="{% url 'spotluck:index' %}">
+          <div class="navbar__menu__item">BLOG</div>
+        </a>
+        <div class="navbar__badges">
+          <a href="https://smart.link/598ca2ba8751e">
+            <div class="navbar__menu__item"><img class="app__link" src="http://www.spotluck.com/images/badges/appStore-blhigh.png" alt="Appstore Link"></div>
+          </a>
+          <a href="https://smart.link/598ca3024f782">
+            <div class="navbar__menu__item"><img class="app__link" src="http://www.spotluck.com/images/badges/playStore-blhigh.png" alt="Googleplay link"></div>
+          </a>
+        </div>
+      </div>
+    </nav>
+  </div>
+</div>
+
+ <div id="nav-background"></div>
+  <section id="header" class="section section--header section--half">
+    <!-- Phone and Wheel placed here because they are positioned based on the content__section div -->
+    <div style="background: url({{hotel.featured_image}});background-size: cover;background-position: center;background-repeat: no-repeat;" id="header-cover" class="section__cover"></div>
+    <div class="section__content">
+      <div class="row">
+        <img class="logo" src="{{hotel.logo}}" alt="{{hotel.name}}">
+      </div>
+        <div class="row"><h1 class="section__title">{{hotel.name}}</h1></div>
+        <div class="row"><h1 class="section__subtitle">{{hotel.cuisine}}</h1></div>
+        <div class="row"><h6 class="section__subtitle section__subtitle--italic">Hotel subtitle goes here</h6></div>
+      </div>
+    </div>
+  </section>
+
+<div id="content" class="content content--restaurant">
+  <div class="row row--padding">
+    <div class="container">
+      <div class="nine columns">
+        <h3 class="title">RATINGS &amp; REVIEWS</h3>
+        <p class="sub-title italic">426 ratings (gps-verified) for {{hotel.name}}</p>
+        <p>
+        </p>
+        <div class="row">
+          <div class="three columns">
+            <h3 class="totalrating-field">Food</h3>
+            <h3 class="totalrating-value"><b>
+              4.5
+              </b>
+            </h3>
+          </div>
+          <div class="three columns">
+            <h3 class="totalrating-field">Service</h3>
+            <h3 class="totalrating-value"><b>
+              4.5
+              </b>
+            </h3>
+          </div>
+          <div class="three columns">
+            <h3 class="totalrating-field">Atmosphere</h3>
+            <h3 class="totalrating-value"><b>
+              4.0
+              </b>
+            </h3>
+          </div>
+        </div>
+        <p></p>
+        <hr>
+        <div class="row ng-scope" ng-app="spotluckApp" ng-controller="ReviewController" id="reviewContent" ng-init="init('575657aab7ce9343c684873e')">
+          <!-- ngRepeat: item in reviews --><!-- ngIf: reviews.length > 0 -->
+          <div ng-repeat="item in reviews" ng-if="reviews.length > 0" class="ng-scope">
+            <div class="row">
+              <div class="three columns">
+                <p>
+                  <!-- ngRepeat: n in item.ratingCircles track by $index -->
+                  <span ng-repeat="n in item.ratingCircles track by $index" class="ng-scope">
+                    <!-- ngIf: n == 1 --><img class="rating-image ng-scope" src="http://www.spotluck.com/images/green_wheel.png" alt="rating" ng-if="n == 1"><!-- end ngIf: n == 1 -->
+                    <!-- ngIf: n == 0 -->
+                    <!-- ngIf: n == 0.5 -->
+                  </span>
+                  <!-- end ngRepeat: n in item.ratingCircles track by $index -->
+                  <span ng-repeat="n in item.ratingCircles track by $index" class="ng-scope">
+                    <!-- ngIf: n == 1 --><img class="rating-image ng-scope" src="http://www.spotluck.com/images/green_wheel.png" alt="rating" ng-if="n == 1"><!-- end ngIf: n == 1 -->
+                    <!-- ngIf: n == 0 -->
+                    <!-- ngIf: n == 0.5 -->
+                  </span>
+                  <!-- end ngRepeat: n in item.ratingCircles track by $index -->
+                  <span ng-repeat="n in item.ratingCircles track by $index" class="ng-scope">
+                    <!-- ngIf: n == 1 --><img class="rating-image ng-scope" src="http://www.spotluck.com/images/green_wheel.png" alt="rating" ng-if="n == 1"><!-- end ngIf: n == 1 -->
+                    <!-- ngIf: n == 0 -->
+                    <!-- ngIf: n == 0.5 -->
+                  </span>
+                  <!-- end ngRepeat: n in item.ratingCircles track by $index -->
+                  <span ng-repeat="n in item.ratingCircles track by $index" class="ng-scope">
+                    <!-- ngIf: n == 1 --><img class="rating-image ng-scope" src="http://www.spotluck.com/images/green_wheel.png" alt="rating" ng-if="n == 1"><!-- end ngIf: n == 1 -->
+                    <!-- ngIf: n == 0 -->
+                    <!-- ngIf: n == 0.5 -->
+                  </span>
+                  <!-- end ngRepeat: n in item.ratingCircles track by $index -->
+                  <span ng-repeat="n in item.ratingCircles track by $index" class="ng-scope">
+                    <!-- ngIf: n == 1 --><img class="rating-image ng-scope" src="http://www.spotluck.com/images/green_wheel.png" alt="rating" ng-if="n == 1"><!-- end ngIf: n == 1 -->
+                    <!-- ngIf: n == 0 -->
+                    <!-- ngIf: n == 0.5 -->
+                  </span>
+                  <!-- end ngRepeat: n in item.ratingCircles track by $index -->
+                </p>
+                <p class="rating-area"><span class="rating-field">Food</span><span class="rating-value ng-binding">5</span><br>
+                  <span class="rating-field">Service</span><span class="rating-value ng-binding">5</span><br>
+                  <span class="rating-field">Atmosphere</span><span class="rating-value ng-binding">5</span>
+                </p>
+              </div>
+              <div class="nine columns">
+                <p class="ng-binding">Excellent meal. I loved the Lebonese platter and Schwarma.   Baklava was a great way to finish off the meal.  When can I come back?</p>
+                <p class="review-header ng-binding">asfghkdssgh&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;November 2017</p>
+              </div>
+            </div>
+            <hr>
+          </div>
+          <!-- end ngIf: reviews.length > 0 --><!-- end ngRepeat: item in reviews --><!-- ngIf: reviews.length > 0 -->
+          <div ng-repeat="item in reviews" ng-if="reviews.length > 0" class="ng-scope">
+            <div class="row">
+              <div class="three columns">
+                <p>
+                  <!-- ngRepeat: n in item.ratingCircles track by $index -->
+                  <span ng-repeat="n in item.ratingCircles track by $index" class="ng-scope">
+                    <!-- ngIf: n == 1 --><img class="rating-image ng-scope" src="http://www.spotluck.com/images/green_wheel.png" alt="rating" ng-if="n == 1"><!-- end ngIf: n == 1 -->
+                    <!-- ngIf: n == 0 -->
+                    <!-- ngIf: n == 0.5 -->
+                  </span>
+                  <!-- end ngRepeat: n in item.ratingCircles track by $index -->
+                  <span ng-repeat="n in item.ratingCircles track by $index" class="ng-scope">
+                    <!-- ngIf: n == 1 --><img class="rating-image ng-scope" src="http://www.spotluck.com/images/green_wheel.png" alt="rating" ng-if="n == 1"><!-- end ngIf: n == 1 -->
+                    <!-- ngIf: n == 0 -->
+                    <!-- ngIf: n == 0.5 -->
+                  </span>
+                  <!-- end ngRepeat: n in item.ratingCircles track by $index -->
+                  <span ng-repeat="n in item.ratingCircles track by $index" class="ng-scope">
+                    <!-- ngIf: n == 1 --><img class="rating-image ng-scope" src="http://www.spotluck.com/images/green_wheel.png" alt="rating" ng-if="n == 1"><!-- end ngIf: n == 1 -->
+                    <!-- ngIf: n == 0 -->
+                    <!-- ngIf: n == 0.5 -->
+                  </span>
+                  <!-- end ngRepeat: n in item.ratingCircles track by $index -->
+                  <span ng-repeat="n in item.ratingCircles track by $index" class="ng-scope">
+                    <!-- ngIf: n == 1 --><img class="rating-image ng-scope" src="http://www.spotluck.com/images/green_wheel.png" alt="rating" ng-if="n == 1"><!-- end ngIf: n == 1 -->
+                    <!-- ngIf: n == 0 -->
+                    <!-- ngIf: n == 0.5 -->
+                  </span>
+                  <!-- end ngRepeat: n in item.ratingCircles track by $index -->
+                  <span ng-repeat="n in item.ratingCircles track by $index" class="ng-scope">
+                    <!-- ngIf: n == 1 --><img class="rating-image ng-scope" src="http://www.spotluck.com/images/green_wheel.png" alt="rating" ng-if="n == 1"><!-- end ngIf: n == 1 -->
+                    <!-- ngIf: n == 0 -->
+                    <!-- ngIf: n == 0.5 -->
+                  </span>
+                  <!-- end ngRepeat: n in item.ratingCircles track by $index -->
+                </p>
+                <p class="rating-area"><span class="rating-field">Food</span><span class="rating-value ng-binding">5</span><br>
+                  <span class="rating-field">Service</span><span class="rating-value ng-binding">5</span><br>
+                  <span class="rating-field">Atmosphere</span><span class="rating-value ng-binding">5</span>
+                </p>
+              </div>
+              <div class="nine columns">
+                <p class="ng-binding">Great food.  Definitely a great Mediterranean meal. Just need to find the time to come back for my next Mediterranean meal. </p>
+                <p class="review-header ng-binding">asdfghjk&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;November 2017</p>
+              </div>
+            </div>
+            <hr>
+          </div>
+          <!-- end ngIf: reviews.length > 0 --><!-- end ngRepeat: item in reviews --><!-- ngIf: reviews.length > 0 -->
+          <div ng-repeat="item in reviews" ng-if="reviews.length > 0" class="ng-scope">
+            <div class="row">
+              <div class="three columns">
+                <p>
+                  <!-- ngRepeat: n in item.ratingCircles track by $index -->
+                  <span ng-repeat="n in item.ratingCircles track by $index" class="ng-scope">
+                    <!-- ngIf: n == 1 --><img class="rating-image ng-scope" src="http://www.spotluck.com/images/green_wheel.png" alt="rating" ng-if="n == 1"><!-- end ngIf: n == 1 -->
+                    <!-- ngIf: n == 0 -->
+                    <!-- ngIf: n == 0.5 -->
+                  </span>
+                  <!-- end ngRepeat: n in item.ratingCircles track by $index -->
+                  <span ng-repeat="n in item.ratingCircles track by $index" class="ng-scope">
+                    <!-- ngIf: n == 1 --><img class="rating-image ng-scope" src="http://www.spotluck.com/images/green_wheel.png" alt="rating" ng-if="n == 1"><!-- end ngIf: n == 1 -->
+                    <!-- ngIf: n == 0 -->
+                    <!-- ngIf: n == 0.5 -->
+                  </span>
+                  <!-- end ngRepeat: n in item.ratingCircles track by $index -->
+                  <span ng-repeat="n in item.ratingCircles track by $index" class="ng-scope">
+                    <!-- ngIf: n == 1 --><img class="rating-image ng-scope" src="http://www.spotluck.com/images/green_wheel.png" alt="rating" ng-if="n == 1"><!-- end ngIf: n == 1 -->
+                    <!-- ngIf: n == 0 -->
+                    <!-- ngIf: n == 0.5 -->
+                  </span>
+                  <!-- end ngRepeat: n in item.ratingCircles track by $index -->
+                  <span ng-repeat="n in item.ratingCircles track by $index" class="ng-scope">
+                    <!-- ngIf: n == 1 --><img class="rating-image ng-scope" src="http://www.spotluck.com/images/green_wheel.png" alt="rating" ng-if="n == 1"><!-- end ngIf: n == 1 -->
+                    <!-- ngIf: n == 0 -->
+                    <!-- ngIf: n == 0.5 -->
+                  </span>
+                  <!-- end ngRepeat: n in item.ratingCircles track by $index -->
+                  <span ng-repeat="n in item.ratingCircles track by $index" class="ng-scope">
+                    <!-- ngIf: n == 1 -->
+                    <!-- ngIf: n == 0 -->
+                    <!-- ngIf: n == 0.5 --><img class="rating-image ng-scope" src="http://www.spotluck.com/images/half_wheel.png" alt="rating" ng-if="n == 0.5"><!-- end ngIf: n == 0.5 -->
+                  </span>
+                  <!-- end ngRepeat: n in item.ratingCircles track by $index -->
+                </p>
+                <p class="rating-area"><span class="rating-field">Food</span><span class="rating-value ng-binding">5</span><br>
+                  <span class="rating-field">Service</span><span class="rating-value ng-binding">3</span><br>
+                  <span class="rating-field">Atmosphere</span><span class="rating-value ng-binding">5</span>
+                </p>
+              </div>
+              <div class="nine columns">
+                <p class="ng-binding">Arriving a little after 11:45am for lunch at Lebanese Taverna, we thought we had beat the crowd since no one was there but our food came out much later than everyone's else. The Lentil Soup and Chicken Kabob Platter was delicious as usual.</p>
+                <p class="review-header ng-binding">TheUltimateFoodie&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;October 2017</p>
+              </div>
+            </div>
+            <hr>
+          </div>
+          <!-- end ngIf: reviews.length > 0 --><!-- end ngRepeat: item in reviews --><!-- ngIf: reviews.length > 0 -->
+          <div ng-repeat="item in reviews" ng-if="reviews.length > 0" class="ng-scope">
+            <div class="row">
+              <div class="three columns">
+                <p>
+                  <!-- ngRepeat: n in item.ratingCircles track by $index -->
+                  <span ng-repeat="n in item.ratingCircles track by $index" class="ng-scope">
+                    <!-- ngIf: n == 1 --><img class="rating-image ng-scope" src="http://www.spotluck.com/images/green_wheel.png" alt="rating" ng-if="n == 1"><!-- end ngIf: n == 1 -->
+                    <!-- ngIf: n == 0 -->
+                    <!-- ngIf: n == 0.5 -->
+                  </span>
+                  <!-- end ngRepeat: n in item.ratingCircles track by $index -->
+                  <span ng-repeat="n in item.ratingCircles track by $index" class="ng-scope">
+                    <!-- ngIf: n == 1 --><img class="rating-image ng-scope" src="http://www.spotluck.com/images/green_wheel.png" alt="rating" ng-if="n == 1"><!-- end ngIf: n == 1 -->
+                    <!-- ngIf: n == 0 -->
+                    <!-- ngIf: n == 0.5 -->
+                  </span>
+                  <!-- end ngRepeat: n in item.ratingCircles track by $index -->
+                  <span ng-repeat="n in item.ratingCircles track by $index" class="ng-scope">
+                    <!-- ngIf: n == 1 --><img class="rating-image ng-scope" src="http://www.spotluck.com/images/green_wheel.png" alt="rating" ng-if="n == 1"><!-- end ngIf: n == 1 -->
+                    <!-- ngIf: n == 0 -->
+                    <!-- ngIf: n == 0.5 -->
+                  </span>
+                  <!-- end ngRepeat: n in item.ratingCircles track by $index -->
+                  <span ng-repeat="n in item.ratingCircles track by $index" class="ng-scope">
+                    <!-- ngIf: n == 1 --><img class="rating-image ng-scope" src="http://www.spotluck.com/images/green_wheel.png" alt="rating" ng-if="n == 1"><!-- end ngIf: n == 1 -->
+                    <!-- ngIf: n == 0 -->
+                    <!-- ngIf: n == 0.5 -->
+                  </span>
+                  <!-- end ngRepeat: n in item.ratingCircles track by $index -->
+                  <span ng-repeat="n in item.ratingCircles track by $index" class="ng-scope">
+                    <!-- ngIf: n == 1 -->
+                    <!-- ngIf: n == 0 -->
+                    <!-- ngIf: n == 0.5 --><img class="rating-image ng-scope" src="http://www.spotluck.com/images/half_wheel.png" alt="rating" ng-if="n == 0.5"><!-- end ngIf: n == 0.5 -->
+                  </span>
+                  <!-- end ngRepeat: n in item.ratingCircles track by $index -->
+                </p>
+                <p class="rating-area"><span class="rating-field">Food</span><span class="rating-value ng-binding">4</span><br>
+                  <span class="rating-field">Service</span><span class="rating-value ng-binding">4</span><br>
+                  <span class="rating-field">Atmosphere</span><span class="rating-value ng-binding">4</span>
+                </p>
+              </div>
+              <div class="nine columns">
+                <p class="ng-binding">Solid food, nice atmosphere. You order at counter unlike other Lebanese tavernas I've been at. Lamb could have been less fatty. </p>
+                <p class="review-header ng-binding">Layla&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;May 2017</p>
+              </div>
+            </div>
+            <hr>
+          </div>
+          <!-- end ngIf: reviews.length > 0 --><!-- end ngRepeat: item in reviews --><!-- ngIf: reviews.length > 0 -->
+          <div ng-repeat="item in reviews" ng-if="reviews.length > 0" class="ng-scope">
+            <div class="row">
+              <div class="three columns">
+                <p>
+                  <!-- ngRepeat: n in item.ratingCircles track by $index -->
+                  <span ng-repeat="n in item.ratingCircles track by $index" class="ng-scope">
+                    <!-- ngIf: n == 1 --><img class="rating-image ng-scope" src="http://www.spotluck.com/images/green_wheel.png" alt="rating" ng-if="n == 1"><!-- end ngIf: n == 1 -->
+                    <!-- ngIf: n == 0 -->
+                    <!-- ngIf: n == 0.5 -->
+                  </span>
+                  <!-- end ngRepeat: n in item.ratingCircles track by $index -->
+                  <span ng-repeat="n in item.ratingCircles track by $index" class="ng-scope">
+                    <!-- ngIf: n == 1 --><img class="rating-image ng-scope" src="http://www.spotluck.com/images/green_wheel.png" alt="rating" ng-if="n == 1"><!-- end ngIf: n == 1 -->
+                    <!-- ngIf: n == 0 -->
+                    <!-- ngIf: n == 0.5 -->
+                  </span>
+                  <!-- end ngRepeat: n in item.ratingCircles track by $index -->
+                  <span ng-repeat="n in item.ratingCircles track by $index" class="ng-scope">
+                    <!-- ngIf: n == 1 --><img class="rating-image ng-scope" src="http://www.spotluck.com/images/green_wheel.png" alt="rating" ng-if="n == 1"><!-- end ngIf: n == 1 -->
+                    <!-- ngIf: n == 0 -->
+                    <!-- ngIf: n == 0.5 -->
+                  </span>
+                  <!-- end ngRepeat: n in item.ratingCircles track by $index -->
+                  <span ng-repeat="n in item.ratingCircles track by $index" class="ng-scope">
+                    <!-- ngIf: n == 1 --><img class="rating-image ng-scope" src="http://www.spotluck.com/images/green_wheel.png" alt="rating" ng-if="n == 1"><!-- end ngIf: n == 1 -->
+                    <!-- ngIf: n == 0 -->
+                    <!-- ngIf: n == 0.5 -->
+                  </span>
+                  <!-- end ngRepeat: n in item.ratingCircles track by $index -->
+                  <span ng-repeat="n in item.ratingCircles track by $index" class="ng-scope">
+                    <!-- ngIf: n == 1 --><img class="rating-image ng-scope" src="http://www.spotluck.com/images/green_wheel.png" alt="rating" ng-if="n == 1"><!-- end ngIf: n == 1 -->
+                    <!-- ngIf: n == 0 -->
+                    <!-- ngIf: n == 0.5 -->
+                  </span>
+                  <!-- end ngRepeat: n in item.ratingCircles track by $index -->
+                </p>
+                <p class="rating-area"><span class="rating-field">Food</span><span class="rating-value ng-binding">5</span><br>
+                  <span class="rating-field">Service</span><span class="rating-value ng-binding">5</span><br>
+                  <span class="rating-field">Atmosphere</span><span class="rating-value ng-binding">5</span>
+                </p>
+              </div>
+              <div class="nine columns">
+                <p class="ng-binding">Always love eating here! </p>
+                <p class="review-header ng-binding">ekopapers&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;November 2017</p>
+              </div>
+            </div>
+            <hr>
+          </div>
+          <!-- end ngIf: reviews.length > 0 --><!-- end ngRepeat: item in reviews --><!-- ngIf: reviews.length > 0 -->
+          <div ng-repeat="item in reviews" ng-if="reviews.length > 0" class="ng-scope">
+            <div class="row">
+              <div class="three columns">
+                <p>
+                  <!-- ngRepeat: n in item.ratingCircles track by $index -->
+                  <span ng-repeat="n in item.ratingCircles track by $index" class="ng-scope">
+                    <!-- ngIf: n == 1 --><img class="rating-image ng-scope" src="http://www.spotluck.com/images/green_wheel.png" alt="rating" ng-if="n == 1"><!-- end ngIf: n == 1 -->
+                    <!-- ngIf: n == 0 -->
+                    <!-- ngIf: n == 0.5 -->
+                  </span>
+                  <!-- end ngRepeat: n in item.ratingCircles track by $index -->
+                  <span ng-repeat="n in item.ratingCircles track by $index" class="ng-scope">
+                    <!-- ngIf: n == 1 --><img class="rating-image ng-scope" src="http://www.spotluck.com/images/green_wheel.png" alt="rating" ng-if="n == 1"><!-- end ngIf: n == 1 -->
+                    <!-- ngIf: n == 0 -->
+                    <!-- ngIf: n == 0.5 -->
+                  </span>
+                  <!-- end ngRepeat: n in item.ratingCircles track by $index -->
+                  <span ng-repeat="n in item.ratingCircles track by $index" class="ng-scope">
+                    <!-- ngIf: n == 1 --><img class="rating-image ng-scope" src="http://www.spotluck.com/images/green_wheel.png" alt="rating" ng-if="n == 1"><!-- end ngIf: n == 1 -->
+                    <!-- ngIf: n == 0 -->
+                    <!-- ngIf: n == 0.5 -->
+                  </span>
+                  <!-- end ngRepeat: n in item.ratingCircles track by $index -->
+                  <span ng-repeat="n in item.ratingCircles track by $index" class="ng-scope">
+                    <!-- ngIf: n == 1 --><img class="rating-image ng-scope" src="http://www.spotluck.com/images/green_wheel.png" alt="rating" ng-if="n == 1"><!-- end ngIf: n == 1 -->
+                    <!-- ngIf: n == 0 -->
+                    <!-- ngIf: n == 0.5 -->
+                  </span>
+                  <!-- end ngRepeat: n in item.ratingCircles track by $index -->
+                  <span ng-repeat="n in item.ratingCircles track by $index" class="ng-scope">
+                    <!-- ngIf: n == 1 -->
+                    <!-- ngIf: n == 0 -->
+                    <!-- ngIf: n == 0.5 --><img class="rating-image ng-scope" src="http://www.spotluck.com/images/half_wheel.png" alt="rating" ng-if="n == 0.5"><!-- end ngIf: n == 0.5 -->
+                  </span>
+                  <!-- end ngRepeat: n in item.ratingCircles track by $index -->
+                </p>
+                <p class="rating-area"><span class="rating-field">Food</span><span class="rating-value ng-binding">5</span><br>
+                  <span class="rating-field">Service</span><span class="rating-value ng-binding">4</span><br>
+                  <span class="rating-field">Atmosphere</span><span class="rating-value ng-binding">5</span>
+                </p>
+              </div>
+              <div class="nine columns">
+                <p class="ng-binding">They weren't equipped to handle a large number of people during a week day rush...</p>
+                <p class="review-header ng-binding">Spotlucker799397&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;June 2017</p>
+              </div>
+            </div>
+            <hr>
+          </div>
+          <!-- end ngIf: reviews.length > 0 --><!-- end ngRepeat: item in reviews --><!-- ngIf: reviews.length > 0 -->
+          <div ng-repeat="item in reviews" ng-if="reviews.length > 0" class="ng-scope">
+            <div class="row">
+              <div class="three columns">
+                <p>
+                  <!-- ngRepeat: n in item.ratingCircles track by $index -->
+                  <span ng-repeat="n in item.ratingCircles track by $index" class="ng-scope">
+                    <!-- ngIf: n == 1 --><img class="rating-image ng-scope" src="http://www.spotluck.com/images/green_wheel.png" alt="rating" ng-if="n == 1"><!-- end ngIf: n == 1 -->
+                    <!-- ngIf: n == 0 -->
+                    <!-- ngIf: n == 0.5 -->
+                  </span>
+                  <!-- end ngRepeat: n in item.ratingCircles track by $index -->
+                  <span ng-repeat="n in item.ratingCircles track by $index" class="ng-scope">
+                    <!-- ngIf: n == 1 --><img class="rating-image ng-scope" src="http://www.spotluck.com/images/green_wheel.png" alt="rating" ng-if="n == 1"><!-- end ngIf: n == 1 -->
+                    <!-- ngIf: n == 0 -->
+                    <!-- ngIf: n == 0.5 -->
+                  </span>
+                  <!-- end ngRepeat: n in item.ratingCircles track by $index -->
+                  <span ng-repeat="n in item.ratingCircles track by $index" class="ng-scope">
+                    <!-- ngIf: n == 1 --><img class="rating-image ng-scope" src="http://www.spotluck.com/images/green_wheel.png" alt="rating" ng-if="n == 1"><!-- end ngIf: n == 1 -->
+                    <!-- ngIf: n == 0 -->
+                    <!-- ngIf: n == 0.5 -->
+                  </span>
+                  <!-- end ngRepeat: n in item.ratingCircles track by $index -->
+                  <span ng-repeat="n in item.ratingCircles track by $index" class="ng-scope">
+                    <!-- ngIf: n == 1 --><img class="rating-image ng-scope" src="http://www.spotluck.com/images/green_wheel.png" alt="rating" ng-if="n == 1"><!-- end ngIf: n == 1 -->
+                    <!-- ngIf: n == 0 -->
+                    <!-- ngIf: n == 0.5 -->
+                  </span>
+                  <!-- end ngRepeat: n in item.ratingCircles track by $index -->
+                  <span ng-repeat="n in item.ratingCircles track by $index" class="ng-scope">
+                    <!-- ngIf: n == 1 -->
+                    <!-- ngIf: n == 0 -->
+                    <!-- ngIf: n == 0.5 --><img class="rating-image ng-scope" src="http://www.spotluck.com/images/half_wheel.png" alt="rating" ng-if="n == 0.5"><!-- end ngIf: n == 0.5 -->
+                  </span>
+                  <!-- end ngRepeat: n in item.ratingCircles track by $index -->
+                </p>
+                <p class="rating-area"><span class="rating-field">Food</span><span class="rating-value ng-binding">4</span><br>
+                  <span class="rating-field">Service</span><span class="rating-value ng-binding">4</span><br>
+                  <span class="rating-field">Atmosphere</span><span class="rating-value ng-binding">4</span>
+                </p>
+              </div>
+              <div class="nine columns">
+                <p class="ng-binding">Consistently good and quick.</p>
+                <p class="review-header ng-binding">ehayton&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;September 2017</p>
+              </div>
+            </div>
+            <hr>
+          </div>
+          <!-- end ngIf: reviews.length > 0 --><!-- end ngRepeat: item in reviews --><!-- ngIf: reviews.length > 0 -->
+          <div ng-repeat="item in reviews" ng-if="reviews.length > 0" class="ng-scope">
+            <div class="row">
+              <div class="three columns">
+                <p>
+                  <!-- ngRepeat: n in item.ratingCircles track by $index -->
+                  <span ng-repeat="n in item.ratingCircles track by $index" class="ng-scope">
+                    <!-- ngIf: n == 1 --><img class="rating-image ng-scope" src="http://www.spotluck.com/images/green_wheel.png" alt="rating" ng-if="n == 1"><!-- end ngIf: n == 1 -->
+                    <!-- ngIf: n == 0 -->
+                    <!-- ngIf: n == 0.5 -->
+                  </span>
+                  <!-- end ngRepeat: n in item.ratingCircles track by $index -->
+                  <span ng-repeat="n in item.ratingCircles track by $index" class="ng-scope">
+                    <!-- ngIf: n == 1 --><img class="rating-image ng-scope" src="http://www.spotluck.com/images/green_wheel.png" alt="rating" ng-if="n == 1"><!-- end ngIf: n == 1 -->
+                    <!-- ngIf: n == 0 -->
+                    <!-- ngIf: n == 0.5 -->
+                  </span>
+                  <!-- end ngRepeat: n in item.ratingCircles track by $index -->
+                  <span ng-repeat="n in item.ratingCircles track by $index" class="ng-scope">
+                    <!-- ngIf: n == 1 --><img class="rating-image ng-scope" src="http://www.spotluck.com/images/green_wheel.png" alt="rating" ng-if="n == 1"><!-- end ngIf: n == 1 -->
+                    <!-- ngIf: n == 0 -->
+                    <!-- ngIf: n == 0.5 -->
+                  </span>
+                  <!-- end ngRepeat: n in item.ratingCircles track by $index -->
+                  <span ng-repeat="n in item.ratingCircles track by $index" class="ng-scope">
+                    <!-- ngIf: n == 1 --><img class="rating-image ng-scope" src="http://www.spotluck.com/images/green_wheel.png" alt="rating" ng-if="n == 1"><!-- end ngIf: n == 1 -->
+                    <!-- ngIf: n == 0 -->
+                    <!-- ngIf: n == 0.5 -->
+                  </span>
+                  <!-- end ngRepeat: n in item.ratingCircles track by $index -->
+                  <span ng-repeat="n in item.ratingCircles track by $index" class="ng-scope">
+                    <!-- ngIf: n == 1 -->
+                    <!-- ngIf: n == 0 -->
+                    <!-- ngIf: n == 0.5 --><img class="rating-image ng-scope" src="http://www.spotluck.com/images/half_wheel.png" alt="rating" ng-if="n == 0.5"><!-- end ngIf: n == 0.5 -->
+                  </span>
+                  <!-- end ngRepeat: n in item.ratingCircles track by $index -->
+                </p>
+                <p class="rating-area"><span class="rating-field">Food</span><span class="rating-value ng-binding">4.5</span><br>
+                  <span class="rating-field">Service</span><span class="rating-value ng-binding">5</span><br>
+                  <span class="rating-field">Atmosphere</span><span class="rating-value ng-binding">4.5</span>
+                </p>
+              </div>
+              <div class="nine columns">
+                <p class="ng-binding">My favorite item here is the chicken fatteh. It's basically chicken breast with a warm yogurt sauce. I also like their falafel.</p>
+                <p class="review-header ng-binding">Spotlucker521674&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;February 2017</p>
+              </div>
+            </div>
+            <hr>
+          </div>
+          <!-- end ngIf: reviews.length > 0 --><!-- end ngRepeat: item in reviews --><!-- ngIf: reviews.length > 0 -->
+          <div ng-repeat="item in reviews" ng-if="reviews.length > 0" class="ng-scope">
+            <div class="row">
+              <div class="three columns">
+                <p>
+                  <!-- ngRepeat: n in item.ratingCircles track by $index -->
+                  <span ng-repeat="n in item.ratingCircles track by $index" class="ng-scope">
+                    <!-- ngIf: n == 1 --><img class="rating-image ng-scope" src="http://www.spotluck.com/images/green_wheel.png" alt="rating" ng-if="n == 1"><!-- end ngIf: n == 1 -->
+                    <!-- ngIf: n == 0 -->
+                    <!-- ngIf: n == 0.5 -->
+                  </span>
+                  <!-- end ngRepeat: n in item.ratingCircles track by $index -->
+                  <span ng-repeat="n in item.ratingCircles track by $index" class="ng-scope">
+                    <!-- ngIf: n == 1 -->
+                    <!-- ngIf: n == 0 -->
+                    <!-- ngIf: n == 0.5 --><img class="rating-image ng-scope" src="http://www.spotluck.com/images/half_wheel.png" alt="rating" ng-if="n == 0.5"><!-- end ngIf: n == 0.5 -->
+                  </span>
+                  <!-- end ngRepeat: n in item.ratingCircles track by $index -->
+                  <span ng-repeat="n in item.ratingCircles track by $index" class="ng-scope">
+                    <!-- ngIf: n == 1 -->
+                    <!-- ngIf: n == 0 --><img class="rating-image ng-scope" src="http://www.spotluck.com/images/grey_wheel.png" alt="rating" ng-if="n == 0"><!-- end ngIf: n == 0 -->
+                    <!-- ngIf: n == 0.5 -->
+                  </span>
+                  <!-- end ngRepeat: n in item.ratingCircles track by $index -->
+                  <span ng-repeat="n in item.ratingCircles track by $index" class="ng-scope">
+                    <!-- ngIf: n == 1 -->
+                    <!-- ngIf: n == 0 --><img class="rating-image ng-scope" src="http://www.spotluck.com/images/grey_wheel.png" alt="rating" ng-if="n == 0"><!-- end ngIf: n == 0 -->
+                    <!-- ngIf: n == 0.5 -->
+                  </span>
+                  <!-- end ngRepeat: n in item.ratingCircles track by $index -->
+                  <span ng-repeat="n in item.ratingCircles track by $index" class="ng-scope">
+                    <!-- ngIf: n == 1 -->
+                    <!-- ngIf: n == 0 --><img class="rating-image ng-scope" src="http://www.spotluck.com/images/grey_wheel.png" alt="rating" ng-if="n == 0"><!-- end ngIf: n == 0 -->
+                    <!-- ngIf: n == 0.5 -->
+                  </span>
+                  <!-- end ngRepeat: n in item.ratingCircles track by $index -->
+                </p>
+                <p class="rating-area"><span class="rating-field">Food</span><span class="rating-value ng-binding">2</span><br>
+                  <span class="rating-field">Service</span><span class="rating-value ng-binding">0.5</span><br>
+                  <span class="rating-field">Atmosphere</span><span class="rating-value ng-binding">1.5</span>
+                </p>
+              </div>
+              <div class="nine columns">
+                <p class="ng-binding">Service was awful. No plates given and had to wait to be handed some welll after food was served.</p>
+                <p class="review-header ng-binding">atomchin&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;February 2017</p>
+              </div>
+            </div>
+            <hr>
+          </div>
+          <!-- end ngIf: reviews.length > 0 --><!-- end ngRepeat: item in reviews --><!-- ngIf: reviews.length > 0 -->
+          <div ng-repeat="item in reviews" ng-if="reviews.length > 0" class="ng-scope">
+            <div class="row">
+              <div class="three columns">
+                <p>
+                  <!-- ngRepeat: n in item.ratingCircles track by $index -->
+                  <span ng-repeat="n in item.ratingCircles track by $index" class="ng-scope">
+                    <!-- ngIf: n == 1 --><img class="rating-image ng-scope" src="http://www.spotluck.com/images/green_wheel.png" alt="rating" ng-if="n == 1"><!-- end ngIf: n == 1 -->
+                    <!-- ngIf: n == 0 -->
+                    <!-- ngIf: n == 0.5 -->
+                  </span>
+                  <!-- end ngRepeat: n in item.ratingCircles track by $index -->
+                  <span ng-repeat="n in item.ratingCircles track by $index" class="ng-scope">
+                    <!-- ngIf: n == 1 --><img class="rating-image ng-scope" src="http://www.spotluck.com/images/green_wheel.png" alt="rating" ng-if="n == 1"><!-- end ngIf: n == 1 -->
+                    <!-- ngIf: n == 0 -->
+                    <!-- ngIf: n == 0.5 -->
+                  </span>
+                  <!-- end ngRepeat: n in item.ratingCircles track by $index -->
+                  <span ng-repeat="n in item.ratingCircles track by $index" class="ng-scope">
+                    <!-- ngIf: n == 1 --><img class="rating-image ng-scope" src="http://www.spotluck.com/images/green_wheel.png" alt="rating" ng-if="n == 1"><!-- end ngIf: n == 1 -->
+                    <!-- ngIf: n == 0 -->
+                    <!-- ngIf: n == 0.5 -->
+                  </span>
+                  <!-- end ngRepeat: n in item.ratingCircles track by $index -->
+                  <span ng-repeat="n in item.ratingCircles track by $index" class="ng-scope">
+                    <!-- ngIf: n == 1 --><img class="rating-image ng-scope" src="http://www.spotluck.com/images/green_wheel.png" alt="rating" ng-if="n == 1"><!-- end ngIf: n == 1 -->
+                    <!-- ngIf: n == 0 -->
+                    <!-- ngIf: n == 0.5 -->
+                  </span>
+                  <!-- end ngRepeat: n in item.ratingCircles track by $index -->
+                  <span ng-repeat="n in item.ratingCircles track by $index" class="ng-scope">
+                    <!-- ngIf: n == 1 --><img class="rating-image ng-scope" src="http://www.spotluck.com/images/green_wheel.png" alt="rating" ng-if="n == 1"><!-- end ngIf: n == 1 -->
+                    <!-- ngIf: n == 0 -->
+                    <!-- ngIf: n == 0.5 -->
+                  </span>
+                  <!-- end ngRepeat: n in item.ratingCircles track by $index -->
+                </p>
+                <p class="rating-area"><span class="rating-field">Food</span><span class="rating-value ng-binding">5</span><br>
+                  <span class="rating-field">Service</span><span class="rating-value ng-binding">5</span><br>
+                  <span class="rating-field">Atmosphere</span><span class="rating-value ng-binding">5</span>
+                </p>
+              </div>
+              <div class="nine columns">
+                <p class="ng-binding">Delicious... very authentic ... see you again soon !</p>
+                <p class="review-header ng-binding">Boberschmidt&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;March 2017</p>
+              </div>
+            </div>
+            <hr>
+          </div>
+          <!-- end ngIf: reviews.length > 0 --><!-- end ngRepeat: item in reviews --><!-- ngIf: reviews.length > 0 -->
+          <div ng-repeat="item in reviews" ng-if="reviews.length > 0" class="ng-scope">
+            <div class="row">
+              <div class="three columns">
+                <p>
+                  <!-- ngRepeat: n in item.ratingCircles track by $index -->
+                  <span ng-repeat="n in item.ratingCircles track by $index" class="ng-scope">
+                    <!-- ngIf: n == 1 --><img class="rating-image ng-scope" src="http://www.spotluck.com/images/green_wheel.png" alt="rating" ng-if="n == 1"><!-- end ngIf: n == 1 -->
+                    <!-- ngIf: n == 0 -->
+                    <!-- ngIf: n == 0.5 -->
+                  </span>
+                  <!-- end ngRepeat: n in item.ratingCircles track by $index -->
+                  <span ng-repeat="n in item.ratingCircles track by $index" class="ng-scope">
+                    <!-- ngIf: n == 1 --><img class="rating-image ng-scope" src="http://www.spotluck.com/images/green_wheel.png" alt="rating" ng-if="n == 1"><!-- end ngIf: n == 1 -->
+                    <!-- ngIf: n == 0 -->
+                    <!-- ngIf: n == 0.5 -->
+                  </span>
+                  <!-- end ngRepeat: n in item.ratingCircles track by $index -->
+                  <span ng-repeat="n in item.ratingCircles track by $index" class="ng-scope">
+                    <!-- ngIf: n == 1 --><img class="rating-image ng-scope" src="http://www.spotluck.com/images/green_wheel.png" alt="rating" ng-if="n == 1"><!-- end ngIf: n == 1 -->
+                    <!-- ngIf: n == 0 -->
+                    <!-- ngIf: n == 0.5 -->
+                  </span>
+                  <!-- end ngRepeat: n in item.ratingCircles track by $index -->
+                  <span ng-repeat="n in item.ratingCircles track by $index" class="ng-scope">
+                    <!-- ngIf: n == 1 --><img class="rating-image ng-scope" src="http://www.spotluck.com/images/green_wheel.png" alt="rating" ng-if="n == 1"><!-- end ngIf: n == 1 -->
+                    <!-- ngIf: n == 0 -->
+                    <!-- ngIf: n == 0.5 -->
+                  </span>
+                  <!-- end ngRepeat: n in item.ratingCircles track by $index -->
+                  <span ng-repeat="n in item.ratingCircles track by $index" class="ng-scope">
+                    <!-- ngIf: n == 1 -->
+                    <!-- ngIf: n == 0 -->
+                    <!-- ngIf: n == 0.5 --><img class="rating-image ng-scope" src="http://www.spotluck.com/images/half_wheel.png" alt="rating" ng-if="n == 0.5"><!-- end ngIf: n == 0.5 -->
+                  </span>
+                  <!-- end ngRepeat: n in item.ratingCircles track by $index -->
+                </p>
+                <p class="rating-area"><span class="rating-field">Food</span><span class="rating-value ng-binding">5</span><br>
+                  <span class="rating-field">Service</span><span class="rating-value ng-binding">5</span><br>
+                  <span class="rating-field">Atmosphere</span><span class="rating-value ng-binding">3</span>
+                </p>
+              </div>
+              <div class="nine columns">
+                <p class="ng-binding">cashier was so nice! the pulled chicken and cheese and the steak Shwarma are delicious! can't believe I've lived here for years and this is my first time eating here, definitely will come back soon </p>
+                <p class="review-header ng-binding">egb1994&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;January 2017</p>
+              </div>
+            </div>
+            <hr>
+          </div>
+          <!-- end ngIf: reviews.length > 0 --><!-- end ngRepeat: item in reviews --><!-- ngIf: reviews.length > 0 -->
+          <div ng-repeat="item in reviews" ng-if="reviews.length > 0" class="ng-scope">
+            <div class="row">
+              <div class="three columns">
+                <p>
+                  <!-- ngRepeat: n in item.ratingCircles track by $index -->
+                  <span ng-repeat="n in item.ratingCircles track by $index" class="ng-scope">
+                    <!-- ngIf: n == 1 --><img class="rating-image ng-scope" src="http://www.spotluck.com/images/green_wheel.png" alt="rating" ng-if="n == 1"><!-- end ngIf: n == 1 -->
+                    <!-- ngIf: n == 0 -->
+                    <!-- ngIf: n == 0.5 -->
+                  </span>
+                  <!-- end ngRepeat: n in item.ratingCircles track by $index -->
+                  <span ng-repeat="n in item.ratingCircles track by $index" class="ng-scope">
+                    <!-- ngIf: n == 1 --><img class="rating-image ng-scope" src="http://www.spotluck.com/images/green_wheel.png" alt="rating" ng-if="n == 1"><!-- end ngIf: n == 1 -->
+                    <!-- ngIf: n == 0 -->
+                    <!-- ngIf: n == 0.5 -->
+                  </span>
+                  <!-- end ngRepeat: n in item.ratingCircles track by $index -->
+                  <span ng-repeat="n in item.ratingCircles track by $index" class="ng-scope">
+                    <!-- ngIf: n == 1 --><img class="rating-image ng-scope" src="http://www.spotluck.com/images/green_wheel.png" alt="rating" ng-if="n == 1"><!-- end ngIf: n == 1 -->
+                    <!-- ngIf: n == 0 -->
+                    <!-- ngIf: n == 0.5 -->
+                  </span>
+                  <!-- end ngRepeat: n in item.ratingCircles track by $index -->
+                  <span ng-repeat="n in item.ratingCircles track by $index" class="ng-scope">
+                    <!-- ngIf: n == 1 --><img class="rating-image ng-scope" src="http://www.spotluck.com/images/green_wheel.png" alt="rating" ng-if="n == 1"><!-- end ngIf: n == 1 -->
+                    <!-- ngIf: n == 0 -->
+                    <!-- ngIf: n == 0.5 -->
+                  </span>
+                  <!-- end ngRepeat: n in item.ratingCircles track by $index -->
+                  <span ng-repeat="n in item.ratingCircles track by $index" class="ng-scope">
+                    <!-- ngIf: n == 1 --><img class="rating-image ng-scope" src="http://www.spotluck.com/images/green_wheel.png" alt="rating" ng-if="n == 1"><!-- end ngIf: n == 1 -->
+                    <!-- ngIf: n == 0 -->
+                    <!-- ngIf: n == 0.5 -->
+                  </span>
+                  <!-- end ngRepeat: n in item.ratingCircles track by $index -->
+                </p>
+                <p class="rating-area"><span class="rating-field">Food</span><span class="rating-value ng-binding">5</span><br>
+                  <span class="rating-field">Service</span><span class="rating-value ng-binding">5</span><br>
+                  <span class="rating-field">Atmosphere</span><span class="rating-value ng-binding">5</span>
+                </p>
+              </div>
+              <div class="nine columns">
+                <p class="ng-binding">Awesome and consistent food that is also delicious.  Friendly and accommodating staff make for a very enjoyable experience.</p>
+                <p class="review-header ng-binding">ss1234&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;December 2016</p>
+              </div>
+            </div>
+            <hr>
+          </div>
+          <!-- end ngIf: reviews.length > 0 --><!-- end ngRepeat: item in reviews --><!-- ngIf: reviews.length > 0 -->
+          <div ng-repeat="item in reviews" ng-if="reviews.length > 0" class="ng-scope">
+            <div class="row">
+              <div class="three columns">
+                <p>
+                  <!-- ngRepeat: n in item.ratingCircles track by $index -->
+                  <span ng-repeat="n in item.ratingCircles track by $index" class="ng-scope">
+                    <!-- ngIf: n == 1 --><img class="rating-image ng-scope" src="http://www.spotluck.com/images/green_wheel.png" alt="rating" ng-if="n == 1"><!-- end ngIf: n == 1 -->
+                    <!-- ngIf: n == 0 -->
+                    <!-- ngIf: n == 0.5 -->
+                  </span>
+                  <!-- end ngRepeat: n in item.ratingCircles track by $index -->
+                  <span ng-repeat="n in item.ratingCircles track by $index" class="ng-scope">
+                    <!-- ngIf: n == 1 --><img class="rating-image ng-scope" src="http://www.spotluck.com/images/green_wheel.png" alt="rating" ng-if="n == 1"><!-- end ngIf: n == 1 -->
+                    <!-- ngIf: n == 0 -->
+                    <!-- ngIf: n == 0.5 -->
+                  </span>
+                  <!-- end ngRepeat: n in item.ratingCircles track by $index -->
+                  <span ng-repeat="n in item.ratingCircles track by $index" class="ng-scope">
+                    <!-- ngIf: n == 1 --><img class="rating-image ng-scope" src="http://www.spotluck.com/images/green_wheel.png" alt="rating" ng-if="n == 1"><!-- end ngIf: n == 1 -->
+                    <!-- ngIf: n == 0 -->
+                    <!-- ngIf: n == 0.5 -->
+                  </span>
+                  <!-- end ngRepeat: n in item.ratingCircles track by $index -->
+                  <span ng-repeat="n in item.ratingCircles track by $index" class="ng-scope">
+                    <!-- ngIf: n == 1 --><img class="rating-image ng-scope" src="http://www.spotluck.com/images/green_wheel.png" alt="rating" ng-if="n == 1"><!-- end ngIf: n == 1 -->
+                    <!-- ngIf: n == 0 -->
+                    <!-- ngIf: n == 0.5 -->
+                  </span>
+                  <!-- end ngRepeat: n in item.ratingCircles track by $index -->
+                  <span ng-repeat="n in item.ratingCircles track by $index" class="ng-scope">
+                    <!-- ngIf: n == 1 -->
+                    <!-- ngIf: n == 0 -->
+                    <!-- ngIf: n == 0.5 --><img class="rating-image ng-scope" src="http://www.spotluck.com/images/half_wheel.png" alt="rating" ng-if="n == 0.5"><!-- end ngIf: n == 0.5 -->
+                  </span>
+                  <!-- end ngRepeat: n in item.ratingCircles track by $index -->
+                </p>
+                <p class="rating-area"><span class="rating-field">Food</span><span class="rating-value ng-binding">4.5</span><br>
+                  <span class="rating-field">Service</span><span class="rating-value ng-binding">4.5</span><br>
+                  <span class="rating-field">Atmosphere</span><span class="rating-value ng-binding">4.5</span>
+                </p>
+              </div>
+              <div class="nine columns">
+                <p class="ng-binding">Always a staple of your hungry and don't know what to eat. Chicken Fateh is amazing. Also their lebneh is to die for. Love this place. We are likely they exist!</p>
+                <p class="review-header ng-binding">pandazeatoo&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;November 2016</p>
+              </div>
+            </div>
+            <hr>
+          </div>
+          <!-- end ngIf: reviews.length > 0 --><!-- end ngRepeat: item in reviews -->
+          <img id="spinnerCtrl" ng-src="/images/spinner.gif" src="/images/spinner.gif" style="display: none;">
+          <div id="noReviewsCtrl" style="display: none;">
+            <h3> No reviews yet! </h3>
+          </div>
+          <button id="btnCtrl" class="btn" href="#" ng-class="nextPageDisabledClass()" ng-click="loadMore()" style="display: inline-block;">Load More Reviews</button>
+          <!-- <pagination total-items="totalItems" ng-model="currentPage" ng-change="pageChanged()" items-per-page="15"  boundary-links="true" rotate="false" max-size="5 "></pagination>-->
+        </div>
+      </div>
+      <div class="three columns" id="about">
+        <div class="row">
+          <h3>ABOUT</h3>
+          <p><b>{{hotel.name}} - {{hotel.hub_name}}</b></p>
+          <p>
+            <a href="http://maps.google.com/?q={{hotel.address_line_1}} ">
+            {{hotel.address_line_1}} <br>
+            Rockville, {{hotel.address_state}} {{hotel.address_zipcode}}</a> <br>
+            <a href="tel:{{hotel.address_phone_number}}">{{hotel.phone_number}}</a><br>
+          </p>
+          <div>
+            <p class="row">
+              <a class="button menu-light-box" href="#" data-lity="">View Menu</a>
+            </p>
+          </div>
+        </div>
+        <div class="row merchant--row">
+          <h3>PHOTOS</h3>
+
+        </div>
+      </div>
+    </div>
+  </div>
+  <section class="section section__places--merchant-page">
+    <div class="container">
+      <div class="row">
+        <div class="columns twelve">
+          <h4 class="u-pull-left">Related N. Rockville Restaurants</h4>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!--END OF PLACES SECTION -->
+</div>
+</body>
+</html>
